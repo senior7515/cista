@@ -8,7 +8,7 @@
 #include "cista/containers.h"
 #endif
 
-using cista::raw::string;
+using string = cista::raw::string;
 
 constexpr auto const CORNER_CASE_SHORT_14 = "01234567891234";
 constexpr auto const CORNER_CASE_SHORT_15 = "012345678912345";

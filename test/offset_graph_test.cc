@@ -10,7 +10,7 @@
 #include "cista/serialization.h"
 #endif
 
-namespace data = cista::offset;
+using data = cista::offset;
 
 #ifdef CISTA_32BIT
 constexpr auto const CHECKSUM_INTEGRITY_AND_VERSION = 11971492370780101450ULL;
@@ -134,7 +134,7 @@ TEST_CASE("graph offset serialize file") {
   auto b = cista::file(FILENAME, "r").content();
   CHECK(cista::hash(b) == CHECKSUM_INTEGRITY_AND_VERSION);
 
-  auto const g = data::deserialize<graph, MODE>(b);
+  auto const g = cista::deserialize<graph, MODE>(b);
   auto const visited = bfs(g->nodes_[0].get());
   unsigned i = 0;
   CHECK((*std::next(begin(visited), i++))->name_ == data::string{"NODE A"});
@@ -173,7 +173,7 @@ TEST_CASE("graph offset serialize buf") {
 
   CHECK(cista::hash(buf) == CHECKSUM_INTEGRITY_AND_VERSION);
 
-  auto const g = data::deserialize<graph, MODE>(buf);
+  auto const g = cista::deserialize<graph, MODE>(buf);
   auto const visited = bfs(g->nodes_[0].get());
   unsigned i = 0;
   CHECK((*std::next(begin(visited), i++))->name_ == data::string{"NODE A"});
@@ -210,7 +210,7 @@ TEST_CASE("graph offset serialize mmap file") {
   }  // EOL graph
 
   auto b = cista::file(FILENAME, "r").content();
-  auto const g = data::deserialize<graph, MODE>(b);
+  auto const g = cista::deserialize<graph, MODE>(b);
   auto const visited = bfs(g->nodes_[0].get());
   unsigned i = 0;
   CHECK((*std::next(begin(visited), i++))->name_ == data::string{"NODE A"});
@@ -248,7 +248,7 @@ TEST_CASE("graph offset serialize endian test") {
   }  // EOL graph
 
   auto b = cista::file(FILENAME, "r").content();
-  auto const g = data::deserialize<graph, MODE>(b);
+  auto const g = cista::deserialize<graph, MODE>(b);
   auto const visited = bfs(g->nodes_[0].get());
   unsigned i = 0;
   CHECK((*std::next(begin(visited), i++))->name_ == data::string{"NODE A"});

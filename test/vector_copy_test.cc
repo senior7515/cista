@@ -7,7 +7,7 @@
 #endif
 
 TEST_CASE("to_tuple") {
-  namespace data = cista::offset;
+  using data = cista::offset;
   data::vector<uint32_t> a;
   a.emplace_back(1u);
   a.emplace_back(2u);

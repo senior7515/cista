@@ -8,8 +8,7 @@
 #include "cista/serialization.h"
 #endif
 
-using namespace cista;
-using namespace cista::raw;
+using cista::raw;
 
 struct serialize_me {
   uint32_t v1_ : 10;
@@ -20,20 +19,20 @@ struct serialize_me {
 };
 
 template <typename Ctx>
-void serialize(Ctx&, serialize_me const*, offset_t const) {}
+void serialize(Ctx&, serialize_me const*, cista::offset_t const) {}
 
 template <typename Ctx>
-void unchecked_deserialize(Ctx const&, serialize_me*) {}
+void deserialize(Ctx const&, serialize_me*) {}
 
 TEST_CASE("custom struct test") {
-  byte_buf buf;
+  cista::byte_buf buf;
 
   {
     serialize_me obj{1, 2, 3, 0, 1};
-    buf = serialize(obj);
+    buf = cista::serialize(obj);
   }  // EOL obj
 
-  auto const serialized = unchecked_deserialize<serialize_me>(buf);
+  auto const serialized = cista::deserialize<serialize_me>(buf);
   CHECK(1 == serialized->v1_);
   CHECK(2 == serialized->v2_);
   CHECK(3 == serialized->v3_);

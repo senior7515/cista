@@ -43,7 +43,7 @@ Download the [latest release](https://github.com/felixguendling/cista/releases/d
 #include "cista.h"
 
 int main() {
-  namespace data = cista::offset;
+  using data = cista::offset;
 
   struct my_struct {  // Define your struct.
     int a_{0};
@@ -60,7 +60,7 @@ int main() {
   }  // End of life for the "obj" value
 
   // Deserialize and read.
-  auto deserialized = data::deserialize<my_struct>(buf);
+  auto deserialized = cista::deserialize<my_struct>(buf);
   assert(deserialized->j.d_ == data::string{"test"});
 }
 ```
@@ -176,7 +176,7 @@ Try it [online](https://onlinegdb.com/rJ-DDD9ZN)!
 
 ```cpp
 // Use the raw serialization format.
-namespace data = cista::raw;
+using data = cista::raw;
 
 // Forward declare `node` to be able to use it in `edge`.
 struct node;
@@ -249,7 +249,7 @@ struct graph {
 }  // EOL graph
 
 auto b = cista::file("test.bin", open_mode::READ).content();
-auto const g = data::deserialize<graph>(b);
+auto const g = cista::deserialize<graph>(b);
 
 use(g);
 ```

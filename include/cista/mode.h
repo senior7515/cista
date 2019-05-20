@@ -8,7 +8,8 @@ enum class mode {
   NONE = 0,
   WITH_VERSION = 1 << 1,
   WITH_INTEGRITY = 1 << 2,
-  SERIALIZE_BIG_ENDIAN = 1 << 3
+  SERIALIZE_BIG_ENDIAN = 1 << 3,
+  UNCHECKED = 1 << 4
 };
 
 constexpr mode operator|(mode const& a, mode const& b) {

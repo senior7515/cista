@@ -6,8 +6,7 @@
 #include "cista/serialization.h"
 #endif
 
-namespace data = cista::offset;
-using namespace cista;
+using data = cista::offset;
 
 static unsigned ctor{0}, cpy_ctor{0}, mov_ctor{0}, cpy_assign{0}, mov_assign{0},
     dtor{0};
@@ -106,7 +105,7 @@ TEST_CASE("array serialize test") {
     buf = cista::serialize(obj);
   }  // EOL obj
 
-  auto const deserialize = data::deserialize<serialize_me>(buf);
+  auto const deserialize = cista::deserialize<serialize_me>(buf);
   CHECK(deserialize->j_.d_[0] == 1);
   CHECK(deserialize->j_.d_[1] == 2);
   CHECK(deserialize->j_.d_[2] == 3);

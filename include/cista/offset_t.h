@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cinttypes>
+#include <limits>
 
 #if _WIN32 || _WIN64
 #if _WIN64
@@ -30,6 +31,7 @@ using offset_t = int32_t;
 #define PRI_O PRId32
 #endif
 
-constexpr auto const NULLPTR_OFFSET = std::numeric_limits<offset_t>::min();
+constexpr auto const NATIVE_NULLPTR_OFFSET =
+    std::numeric_limits<offset_t>::min();
 
 }  // namespace cista
